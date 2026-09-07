@@ -16,12 +16,12 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
    
-    await client.connect();
+    // await client.connect();
     const db = client.db("bloodlink");
     const usersCollection = db.collection("user")
     app.get("/users", async (req, res) =>{
-        const result = await usersCollection.find()
-        const users = await result.toArray();
+        const cursor = await usersCollection.find()
+        const users = await cursor.toArray();
         res.send(users);
     })
 
