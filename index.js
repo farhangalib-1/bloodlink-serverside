@@ -20,7 +20,7 @@ async function run() {
     const db = client.db("bloodlink");
     const usersCollection = db.collection("user")
     app.get("/users", async (req, res) =>{
-        const cursor = await usersCollection.find()
+        const cursor = await usersCollection.find({role:"donor"});
         const users = await cursor.toArray();
         res.send(users);
     })
