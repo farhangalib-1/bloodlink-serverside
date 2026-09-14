@@ -32,7 +32,9 @@ async function run() {
     })
 
     app.get("/blogs", async (req, res) =>{
-      res.send('blogs are here')
+      const cursor = await blogsCollection.find();
+      const blogs = await cursor.toArray();
+      res.send(blogs);
     }
   )
 
