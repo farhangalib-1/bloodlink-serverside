@@ -31,6 +31,10 @@ async function run() {
       res.send(result);
     })
 
+    app.get("/blogs", async (req, res) =>{
+      res.send('blogs are here')
+    }
+  )
 
 
 
