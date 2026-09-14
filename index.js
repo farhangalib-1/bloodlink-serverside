@@ -19,11 +19,20 @@ async function run() {
     // await client.connect();
     const db = client.db("bloodlink");
     const usersCollection = db.collection("user")
+    const blogsCollection = db.collection("blogs")
     app.get("/users", async (req, res) =>{
         const cursor = await usersCollection.find({role:"donor"});
         const users = await cursor.toArray();
         res.send(users);
     })
+     app.post("/blogs", async (req, res) =>{
+      const blog = req.body;
+      const result = await blogsCollection.insertOne(blog);
+      res.send(result);
+    })
+
+
+
 
     // await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
