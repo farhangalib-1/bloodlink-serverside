@@ -45,6 +45,14 @@ async function run() {
     const blog = await blogsCollection.findOne(query);
     res.send(blog);
   })
+  app.get("/users/:id", async (req, res) =>{
+    const {id} = req.params;
+    const query = {
+      _id: new ObjectId(id)
+    }
+    const user = await usersCollection.findOne(query);
+    res.send(user);
+  })
 
 
 
