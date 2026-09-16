@@ -4,7 +4,7 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 app.use(express.json());
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri, {
   serverApi: {
@@ -37,6 +37,14 @@ async function run() {
       res.send(blogs);
     }
   )
+  app.get("/blogs/:id", async (req, res) =>{
+    const {id} = req.params;
+    const query = {
+      _id: new ObjectId(id)
+    } 
+    const blog = await blogsCollection.findOne(query);
+    res.send(blog);
+  })
 
 
 
