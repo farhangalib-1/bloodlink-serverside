@@ -77,6 +77,9 @@ async function run() {
       _id: new ObjectId(id)
     }
     const result = await usersCollection.deleteOne(query);
+    if(result.deletedCount>0){
+       revalidatePath
+    }
     res.send(result);
   })
 
