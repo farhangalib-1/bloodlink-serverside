@@ -20,6 +20,7 @@ async function run() {
     const db = client.db("bloodlink");
     const usersCollection = db.collection("user")
     const blogsCollection = db.collection("blogs")
+    const paymentCollection = db.collection("payment")
     app.get("/allusers", async(req, res) =>{
         const cursor = await usersCollection.find();
         const users = await cursor.toArray();
@@ -57,6 +58,11 @@ async function run() {
     }
     const user = await usersCollection.findOne(query);
     res.send(user);
+  })
+  app.post("/payment", async(req, res) =>{
+    const payment = req.body;
+    const result = await paymentCollection.insertOne(payment);
+    res.send(result);
   })
 
 
