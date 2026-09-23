@@ -65,6 +65,12 @@ async function run() {
     res.send(result);
   })
 
+  app.get("/payment", async(req, res) =>{
+    const cursor = await paymentCollection.find();
+    const payments = await cursor.toArray();
+    res.send(payments);
+  })
+
 
 
     // await client.db("admin").command({ ping: 1 });
