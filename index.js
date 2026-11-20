@@ -33,7 +33,11 @@ async function run() {
     })
      app.post("/blogs", async (req, res) =>{
       const blog = req.body;
-      const result = await blogsCollection.insertOne(blog);
+      const result = await blogsCollection.insertOne(
+        {...blog ,
+        createdAt: new Date(),
+      }
+      );
       res.send(result);
     })
 
